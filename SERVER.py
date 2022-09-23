@@ -1,34 +1,28 @@
+#servidor
 
-import socket
+from socket import *
 
- 
 
-msgFromClient       = "Hello UDP Server"
+host = gethostname()
+port = 55551
 
-bytesToSend         = str.encode(msgFromClient)
+print(f'INFORMAÇOES DO SERVIDOR-> \nHOST: {host}, PORT {port} \n')
 
-serverAddressPort   = ("127.0.0.1", 20001)
+server = socket(AF_INET, SOCK_D)
+server.bind((host, port))
+server.listen()
+client, end = server.accept()
 
-bufferSize          = 1024
+terminado = False
+while not terminado:
+    msg = client.recv(1024).decode('utf-8')
+    if msg == 'tt':
+        terminado = True
+        server.close()
+    else:
+        print('Stranger: ', msg)
+        client.send(input('You: ').encode('utf-8'))
 
- 
+client.close()
+server.close()
 
-# Create a UDP socket at client side
-
-UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-
- 
-
-# Send to server using created UDP socket
-
-UDPClientSocket.sendto(bytesToSend, serverAddressPort)
-
- 
-
-msgFromServer = UDPClientSocket.recvfrom(bufferSize)
-
- 
-
-msg = "Message from Server {}".format(msgFromServer[0])
-
-print(msg)
