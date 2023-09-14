@@ -1,14 +1,12 @@
-#servidor
-
 from socket import *
 
 host = gethostname()
-port = 55551
+port = 12000
 
 print(f'INFORMAÇOES DO SERVIDOR-> \nHOST: {host}, PORT {port} \n')
 
-server = socket(AF_INET, SOCK_DGRAM)
-server.bind((host, port))
+server = socket(AF_INET, SOCK_STREAM)
+server.bind(('', port))
 server.listen()
 client, end = server.accept()
 

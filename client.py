@@ -3,9 +3,9 @@
 from socket import *
 
 host = gethostname()
-port = 55551
+port = 12000
 
-client = socket(AF_INET, SOCK_DGRAM)
+client = socket(AF_INET, SOCK_STREAM)
 client.connect((host, port))
 print('CLIENTE: ')
 terminado = False
