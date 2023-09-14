@@ -2,13 +2,12 @@
 
 from socket import *
 
-
 host = gethostname()
 port = 55551
 
 print(f'INFORMAÇOES DO SERVIDOR-> \nHOST: {host}, PORT {port} \n')
 
-server = socket(AF_INET, SOCK_D)
+server = socket(AF_INET, SOCK_DGRAM)
 server.bind((host, port))
 server.listen()
 client, end = server.accept()
